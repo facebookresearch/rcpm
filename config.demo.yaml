@@ -1,0 +1,59 @@
+defaults:
+  - hydra/sweeper: nevergrad
+  - hydra/launcher: submitit_slurm
+
+seed: 0
+exp: t
+batch_size: 256
+iterations: 10000
+eval_samples: 20000
+log_frequency: 1000
+disable_init_plots: True
+disable_evol_plots: True
+
+sphere:
+  _target_: manifolds.Sphere
+  D: 3
+  jitter: 1e-2
+
+manifold: ${sphere}
+loss: likelihood
+base: SphereBaseWrappedNormal
+target: SphereDemo
+
+optim:
+  _target_: flax.optim.Adam
+  learning_rate: 1e-3
+  beta1: 0.9
+  beta2: 0.999
+
+flow:
+    _target_: flows.SequentialFlow
+    n_transforms: 1
+    single_transform_cfg:
+        _target_: flows.ExpMapFlow
+        potential_cfg: ${infaff_potential}
+
+
+infaff_potential:
+    _target_: flows.InfAffine
+    n_components: 68
+    init_alpha_mode: uniform
+    init_alpha_linear_scale: 1.
+    init_alpha_minval: 0.4
+    init_alpha_range: 0.01
+    cost_gamma: 0.1
+    min_zero_gamma: null
+
+hydra:
+  run:
+    dir: ./exp_local/${now:%Y.%m.%d}/${now:%H%M%S}
+  sweep:
+    dir: ./exp/${now:%Y.%m.%d}/${now:%H%M%S}_${exp}
+    subdir: ${hydra.job.num}
+  launcher:
+    max_num_timeout: 100000
+    timeout_min: 4319
+    partition: learnfair
+    mem_gb: 64
+    gpus_per_node: 1
