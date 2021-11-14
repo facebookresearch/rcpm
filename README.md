@@ -72,10 +72,18 @@ please consider citing our paper:
 
 ```
 @inproceedings{cohen2021riemannian,
-  title={{Riemannian Convex Potential Maps}},
-  author={Cohen*, Samuel and Amos*, Brandon and Lipman, Yaron},
-  booktitle={ICML},
-  year={2021},
+  title = {{Riemannian Convex Potential Maps}},
+  author = {Cohen, Samuel and Amos, Brandon and Lipman, Yaron},
+  booktitle = {Proceedings of the 38th International Conference on Machine Learning},
+  pages = {2028--2038},
+  year = {2021},
+  editor = {Meila, Marina and Zhang, Tong},
+  volume = {139},
+  series = {Proceedings of Machine Learning Research},
+  month = {18--24 Jul},
+  publisher = {PMLR},
+  pdf = 	 {http://proceedings.mlr.press/v139/cohen21a/cohen21a.pdf},
+  url = 	 {https://proceedings.mlr.press/v139/cohen21a.html},
 }
 ```
 
