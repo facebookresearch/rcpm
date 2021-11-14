@@ -83,7 +83,7 @@ please consider citing our paper:
   month = {18--24 Jul},
   publisher = {PMLR},
   pdf = {http://proceedings.mlr.press/v139/cohen21a/cohen21a.pdf},
-  url = {https://proceedings.mlr.press/v139/cohen21a.html},
+  url = {https://proceedings.mlr.press/v139/cohen21a.html}
 }
 ```
 
