@@ -4,11 +4,11 @@ import jax.numpy as np
 from math import pi
 import jax
 
-def spherical_to_euclidean(xyz):
-    single= xyz.ndim == 1
+def spherical_to_euclidean(theta_phi):
+    single= theta_phi.ndim == 1
     if single:
-        xyz = np.expand_dims(xyz, 0)
-    theta, phi = np.split(xyz, 2, 1)
+        theta_phi = np.expand_dims(theta_phi, 0)
+    theta, phi = np.split(theta_phi, 2, 1)
     return np.concatenate((
         np.sin(phi) * np.cos(theta),
         np.sin(phi) * np.sin(theta),
@@ -16,11 +16,11 @@ def spherical_to_euclidean(xyz):
     ), 1)
 
 
-def euclidean_to_spherical(phi_theta):
-    single = phi_theta.ndim == 1
+def euclidean_to_spherical(xyz):
+    single = xyz.ndim == 1
     if single:
-        phi_theta = np.expand_dims(phi_theta, 0)
-    x, y, z = np.split(phi_theta, 3, 1)
+        xyz = np.expand_dims(xyz, 0)
+    x, y, z = np.split(xyz, 3, 1)
     return np.concatenate((
         np.arctan2(y, x),
         np.arccos(z)
