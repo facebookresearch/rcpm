@@ -1,6 +1,6 @@
-defaults:
-  - hydra/sweeper: nevergrad
-  - hydra/launcher: submitit_slurm
+# defaults:
+  # - hydra/sweeper: nevergrad
+  # - hydra/launcher: submitit_slurm
 
 seed: 0
 exp: t
@@ -86,67 +86,67 @@ radial_potential:
 hydra:
   run:
     dir: ./exp_local/${now:%Y.%m.%d}/${now:%H%M%S}
-  sweep:
-    dir: ./exp/${now:%Y.%m.%d}/${now:%H%M%S}_${exp}
-    subdir: ${hydra.job.num}
-  launcher:
-    max_num_timeout: 100000
-    timeout_min: 4319
-    partition: priority
-    comment: ICML
-    mem_gb: 64
-    gpus_per_node: 1
-  sweeper:
-    optim:
-      optimizer: RandomSearch
-      budget: 200
-      num_workers: 200
-    parametrization:
-      optim.learning_rate:
-        lower: 5e-6
-        upper: 1e-1
-        log: True
-        step: 10
-      optim.beta1: [0.1, 0.3, 0.5, 0.7, 0.9]
-      optim.beta2: [0.1, 0.3, 0.5, 0.7, 0.9, 0.99, 0.999]
-      # infaff_potential.n_components:
-      #   lower: 50
-      #   upper: 1000
-      #   integer: True
-      #   log: True
-      #   step: 10
-      # infaff_potential.init_alpha_minval:
-      #   lower: 1e-5
-      #   upper: 10.
-      #   log: True
-      #   step: 10
-      # infaff_potential.init_alpha_range:
-      #   lower: 1e-3
-      #   upper: 1.
-      #   log: True
-      # infaff_potential.cost_gamma: [0.01, 0.05, 0.1, 0.5]
-      # infaff_potential.min_zero_gamma: [null, 0.01, 0.05, 0.1, 0.5]
+  # sweep:
+  #   dir: ./exp/${now:%Y.%m.%d}/${now:%H%M%S}_${exp}
+  #   subdir: ${hydra.job.num}
+  # launcher:
+  #   max_num_timeout: 100000
+  #   timeout_min: 4319
+  #   partition: priority
+  #   comment: ICML
+  #   mem_gb: 64
+  #   gpus_per_node: 1
+  # sweeper:
+  #   optim:
+  #     optimizer: RandomSearch
+  #     budget: 200
+  #     num_workers: 200
+  #   parametrization:
+  #     optim.learning_rate:
+  #       lower: 5e-6
+  #       upper: 1e-1
+  #       log: True
+  #       step: 10
+  #     optim.beta1: [0.1, 0.3, 0.5, 0.7, 0.9]
+  #     optim.beta2: [0.1, 0.3, 0.5, 0.7, 0.9, 0.99, 0.999]
+  #     # infaff_potential.n_components:
+  #     #   lower: 50
+  #     #   upper: 1000
+  #     #   integer: True
+  #     #   log: True
+  #     #   step: 10
+  #     # infaff_potential.init_alpha_minval:
+  #     #   lower: 1e-5
+  #     #   upper: 10.
+  #     #   log: True
+  #     #   step: 10
+  #     # infaff_potential.init_alpha_range:
+  #     #   lower: 1e-3
+  #     #   upper: 1.
+  #     #   log: True
+  #     # infaff_potential.cost_gamma: [0.01, 0.05, 0.1, 0.5]
+  #     # infaff_potential.min_zero_gamma: [null, 0.01, 0.05, 0.1, 0.5]
 
-      multi_infaff_potential.n_components:
-        lower: 50
-        upper: 1000
-        integer: True
-        log: True
-        step: 10
-      multi_infaff_potential.init_alpha_minval:
-        lower: 1e-5
-        upper: 10.
-        log: True
-        step: 10
-      multi_infaff_potential.init_alpha_range:
-        lower: 1e-3
-        upper: 1.
-        log: True
-        step: 10
-      multi_infaff_potential.cost_gamma: [0.01, 0.05, 0.1, 0.5]
-      multi_infaff_potential.min_zero_gamma: [null, 0.01, 0.05, 0.1, 0.5]
-      multi_infaff_potential.n_layers:
-        lower: 1
-        upper: 5
-        integer: True
-        step: 1
+  #     multi_infaff_potential.n_components:
+  #       lower: 50
+  #       upper: 1000
+  #       integer: True
+  #       log: True
+  #       step: 10
+  #     multi_infaff_potential.init_alpha_minval:
+  #       lower: 1e-5
+  #       upper: 10.
+  #       log: True
+  #       step: 10
+  #     multi_infaff_potential.init_alpha_range:
+  #       lower: 1e-3
+  #       upper: 1.
+  #       log: True
+  #       step: 10
+  #     multi_infaff_potential.cost_gamma: [0.01, 0.05, 0.1, 0.5]
+  #     multi_infaff_potential.min_zero_gamma: [null, 0.01, 0.05, 0.1, 0.5]
+  #     multi_infaff_potential.n_layers:
+  #       lower: 1
+  #       upper: 5
+  #       integer: True
+  #       step: 1
