@@ -57,7 +57,9 @@ class Workspace:
         self.key = jax.random.PRNGKey(self.cfg.seed)
 
         self.flow = hydra.utils.instantiate(
-            self.cfg.flow, manifold=self.manifold)
+            self.cfg.flow, manifold=self.manifold,
+            _recursive_=False, _convert_='object',
+        )
         self.key, k1, k2, k3, k4, k5 = jax.random.split(self.key, 6)
         batch = self.base.sample(k1, self.cfg.batch_size)
         init_params = self.flow.init(k2, batch)
@@ -259,7 +261,7 @@ class Workspace:
 # Import like this for pickling
 from main import Workspace as W
 
-@hydra.main(config_name='config')
+@hydra.main(config_path=".", config_name="config.yaml", version_base="1.1")
 def main(cfg):
     fname = os.getcwd() + '/latest.pt'
     if os.path.exists(fname):

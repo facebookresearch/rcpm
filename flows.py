@@ -237,8 +237,8 @@ class ExpMapFlow(nn.Module):
 
     def setup(self):
         self.potential_mod = hydra.utils.instantiate(
-            self.potential_cfg,
-            manifold=self.manifold
+            dict(self.potential_cfg), manifold=self.manifold,
+            _recursive_=False, _convert_='object',
         )
 
 
@@ -291,17 +291,19 @@ class SequentialFlow(nn.Module):
     single_transform_cfg: omegaconf.dictconfig.DictConfig
 
     def setup(self):
-        self.transforms = []
+        transforms = []
         for i in range(self.n_transforms):
             mod = hydra.utils.instantiate(
-                self.single_transform_cfg,
-                manifold=self.manifold
+                dict(self.single_transform_cfg),
+                manifold=self.manifold,
+                _recursive_=False, _convert_='object',
             )
-            self.transforms.append(mod)
+            transforms.append(mod)
 
             # hack for https://github.com/google/flax/issues/524
             key = f'transform{i:02d}'
             setattr(self, key, mod)
+        self.transforms = transforms
 
     def __call__(self, orig_xs, debug=False, t = 1):
         ldjs = 0.
