@@ -6,6 +6,7 @@ from jax import random
 import jax
 from jax.scipy.linalg import block_diag
 
+from spherical_kde import SphericalKDE
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 from scipy.stats import gaussian_kde
@@ -140,10 +141,11 @@ class Sphere(Manifold):
         return jnp.concatenate((jnp.zeros_like(x[..., :1]), x), axis=-1)
 
     def plot_samples(self, model_samples, kde_factor=0.1, save='t.png'):
-        estimated_density = gaussian_kde(
-            utils.euclidean_to_spherical(model_samples).T, kde_factor)
-        heatmap = estimated_density(self.tp.T).reshape(
-            2 * self.NUM_POINTS, self.NUM_POINTS)
+        spherical_samples = utils.euclidean_to_spherical(model_samples)
+        kde = SphericalKDE(
+            spherical_samples[:,0], spherical_samples[:,1], bandwidth=kde_factor)
+        heatmap = np.exp(kde(self.tp[:,0], self.tp[:,1]).reshape(
+            2 * self.NUM_POINTS, self.NUM_POINTS))
         self.plot_mollweide(heatmap, save=save)
 
     def plot_density(self, log_prob_fn, save='t.png'):

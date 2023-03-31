@@ -9,3 +9,4 @@ numpy==1.22
 omegaconf==2.3.0
 scipy==1.10.0
 setproctitle==1.1.10
+spherical_kde==0.1.2
