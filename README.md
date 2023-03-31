@@ -61,6 +61,14 @@ and
 to produce the grid visualization from Figure 2
 of our paper.
 
+# Training with the likelihood
+
+This can be done for the checkerboard dataset with:
+
+```
+$ ./main.py loss=likelihood base=SphereUniform target=SphereCheckerboard
+```
+
 # Other JAX sphere flow library
 [katalinic/sdflows](https://github.com/katalinic/sdflows)
 provides a great JAX re-implementation of
