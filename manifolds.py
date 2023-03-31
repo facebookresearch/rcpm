@@ -55,7 +55,7 @@ sinhdiv = lambda x: jnp.sinh(x) / (x + eps)
 
 def lorentz_cross(x, y):
     z = jnp.cross(x, y)
-    z = jax.ops.index_update(z, jax.ops.index[..., 0], -z[...,0])
+    z = z.at[...,0].set(-z[...,0])
     return z
 
 @dataclass
@@ -125,12 +125,12 @@ class Sphere(Manifold):
 
     def zero(self):
         y = jnp.zeros(self.D)
-        y = jax.ops.index_update(y, jax.ops.index[..., 0], -1.)
+        y = y.at[...,0].set(-1.)
         return y
 
     def zero_like(self, x):
         y = jnp.zeros_like(x)
-        y = jax.ops.index_update(y, jax.ops.index[..., 0], -1.)
+        y = y.at[...,0].set(-1.)
         return y
 
     def squeeze_tangent(self, x):

@@ -8,8 +8,8 @@ batch_size: 256
 iterations: 1e6
 eval_samples: 20000
 log_frequency: 1000
-disable_init_plots: True
-disable_evol_plots: True
+disable_init_plots: False
+disable_evol_plots: False
 
 sphere:
   _target_: manifolds.Sphere

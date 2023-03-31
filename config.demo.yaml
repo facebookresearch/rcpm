@@ -1,6 +1,6 @@
-defaults:
-  - hydra/sweeper: nevergrad
-  - hydra/launcher: submitit_slurm
+# defaults:
+#   - hydra/sweeper: nevergrad
+#   - hydra/launcher: submitit_slurm
 
 seed: 0
 exp: t
@@ -48,12 +48,12 @@ infaff_potential:
 hydra:
   run:
     dir: ./exp_local/${now:%Y.%m.%d}/${now:%H%M%S}
-  sweep:
-    dir: ./exp/${now:%Y.%m.%d}/${now:%H%M%S}_${exp}
-    subdir: ${hydra.job.num}
-  launcher:
-    max_num_timeout: 100000
-    timeout_min: 4319
-    partition: learnfair
-    mem_gb: 64
-    gpus_per_node: 1
+  # sweep:
+  #   dir: ./exp/${now:%Y.%m.%d}/${now:%H%M%S}_${exp}
+  #   subdir: ${hydra.job.num}
+  # launcher:
+  #   max_num_timeout: 100000
+  #   timeout_min: 4319
+  #   partition: learnfair
+  #   mem_gb: 64
+  #   gpus_per_node: 1

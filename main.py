@@ -8,15 +8,15 @@ sys.excepthook = ultratb.FormattedTB(
 
 import numpy as np
 
+import matplotlib.pyplot as plt
+
 import jax
 import jax.numpy as jnp
 from jax.config import config; config.update("jax_enable_x64", True)
 
-
 import pickle as pkl
 
 from flax import linen as nn
-from flax import optim
 
 import time
 
